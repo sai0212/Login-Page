@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "398229182587",
+    "project_id": "login-page-28434",
+    "storage_bucket": "login-page-28434.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398229182587:android:eb736a88642399ae272ade",
+        "android_client_info": {
+          "package_name": "saiaddanki.loginpage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398229182587-9ogedp3hktl2sbddrdsf6euhlusgkvof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "saiaddanki.loginpage",
+            "certificate_hash": "4c744f7f7a351e755e716f2d741c44c393112259"
+          }
+        },
+        {
+          "client_id": "398229182587-0b5s0pba1f37a2p7b2jn7bspf0r4bdp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApGMVZ_Fw1dvE90WsMtTygnUN0_eDzLE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398229182587-0b5s0pba1f37a2p7b2jn7bspf0r4bdp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
