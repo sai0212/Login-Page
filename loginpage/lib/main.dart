@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'home.dart';
 import 'package:loginpage/home.dart';
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
-   //Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
 
   runApp(MyApp());
 }
@@ -136,10 +135,16 @@ class LoginPageState extends State<LoginPage>
                       onPressed: signInWithGoogle,
                       splashColor: Colors.red,
                     )*/
-                    SignInButton(
-                      Buttons.Google,
-                      onPressed: signInWithGoogle,
-                    ),
+                    SignInButton(Buttons.Google, onPressed: () async {
+                      bool success = await signInWithGoogle();
+
+                      if (success) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileScreen()));
+                      }
+                    }),
 
                     /*Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
@@ -154,24 +159,27 @@ class LoginPageState extends State<LoginPage>
     );
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
-
     final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
 
     // ignore: unused_local_variable
     //final User? user =
-        //(await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    //(await FirebaseAuth.instance.signInWithCredential(credential)).user;
 
     //print(user);
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCreds =
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
+    print(userCreds.credential);
+
+    return true;
     //final User details =
-       // new (user!.displayName, user.photoURL, user.email);
+    // new (user!.displayName, user.photoURL, user.email);
 
     /*Navigator.push(
         context,
@@ -181,7 +189,5 @@ class LoginPageState extends State<LoginPage>
     //return user;
   }
 
-  logout() async {
-    await FirebaseAuth.instance.signOut();
-  }
+  
 }

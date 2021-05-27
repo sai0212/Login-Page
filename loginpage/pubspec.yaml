@@ -66,9 +66,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/geckologo.png
-    - assets/ladki.png
-    - assets/girl.png
     - assets/bgimage.jpg
     - assets/logo.png
 

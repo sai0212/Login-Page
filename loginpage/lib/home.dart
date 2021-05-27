@@ -1,6 +1,8 @@
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -20,18 +22,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text("Hello User"),
+      Text("User Logged In"),
+      new Padding(
+                      padding: const EdgeInsets.only(top: 40.0),
+                    ),
       CircleAvatar(
         backgroundImage: NetworkImage('http://www.fillmurray.com/300/300'),
         radius: 60.0,
       ),
-      SignInButton(
-        Buttons.Google,
-        text: 'Sign Out',
-        onPressed: () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoginPage())),
-      )
+      new Padding(
+                      padding: const EdgeInsets.only(top: 40.0),
+                    ),
+      SignInButton(Buttons.Google, text: 'Sign Out', onPressed: () async {
+        bool signOut =  await logout();
+        if (signOut) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                      }
+      }),
     ])));
+  }
+
+  Future<bool> logout() async {
+    await FirebaseAuth.instance.signOut();
+    return true;
   }
 }
 
